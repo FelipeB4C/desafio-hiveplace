@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.List;
-
 @RequestMapping("/tarefa")
 @RestController
 public class TarefaController {
@@ -41,6 +39,11 @@ public class TarefaController {
     public Flux<DetailTarefaDTO> listarTodasTarefas(){
         Flux<Tarefa> listaTarefa = repository.findAll();
         return repository.findAll().map(converter::toDTO);
+    }
+
+    @GetMapping("/listarTodas/{numStatus}")
+    public Flux<DetailTarefaDTO> listaPorStatus(@PathVariable Integer numStatus){
+        return repository.findByStatus(StatusTarefa.toEnum(numStatus)).map(converter::toDTO);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
