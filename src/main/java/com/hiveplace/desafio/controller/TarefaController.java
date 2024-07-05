@@ -43,5 +43,10 @@ public class TarefaController {
         return repository.findAll().map(converter::toDTO);
     }
 
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    public Mono<Void> delete(@PathVariable String id) {
+        return repository.deleteById(id);
+    }
 
 }
