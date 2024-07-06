@@ -20,14 +20,20 @@ public class Tarefa {
     private LocalDate dataTermino;
 
     public Tarefa(){
-
     }
 
     private Tarefa(Builder builder) {
+        this.id = builder.id;
         this.nome = builder.nome;
         this.descricao = builder.descricao;
         this.status = builder.status;
         this.dataTermino = builder.dataTermino;
+    }
+
+    public Tarefa atualiza(Tarefa tarefaAntiga){
+        return builderFrom(this)
+                .withId(tarefaAntiga.getId())
+                .build();
     }
 
     public String getId() {
@@ -60,6 +66,7 @@ public class Tarefa {
 
     public static class Builder {
 
+        private String id;
         private String nome;
         private String descricao;
         private StatusTarefa status;
@@ -70,10 +77,16 @@ public class Tarefa {
         }
 
         public Builder(Tarefa tarefa) {
+            this.id = tarefa.id;
             this.nome = tarefa.nome;
             this.descricao = tarefa.descricao;
             this.status = tarefa.status;
             this.dataTermino = tarefa.dataTermino;
+        }
+
+        public Builder withId(String id){
+            this.id = id;
+            return this;
         }
 
         public Builder withNome(String nome){

@@ -4,6 +4,7 @@ import com.hiveplace.desafio.converter.TarefaConverter;
 import com.hiveplace.desafio.domain.Tarefa;
 import com.hiveplace.desafio.dto.CreateTarefaDTO;
 import com.hiveplace.desafio.dto.DetailTarefaDTO;
+import com.hiveplace.desafio.dto.UpdateTarefaDTO;
 import com.hiveplace.desafio.enums.StatusTarefa;
 import com.hiveplace.desafio.repository.TarefaRepository;
 import org.slf4j.Logger;
@@ -37,13 +38,22 @@ public class TarefaController {
 
     @GetMapping("/listarTodas")
     public Flux<DetailTarefaDTO> listarTodasTarefas(){
-        Flux<Tarefa> listaTarefa = repository.findAll();
         return repository.findAll().map(converter::toDTO);
     }
 
     @GetMapping("/listarTodas/{numStatus}")
     public Flux<DetailTarefaDTO> listaPorStatus(@PathVariable Integer numStatus){
         return repository.findByStatus(StatusTarefa.toEnum(numStatus)).map(converter::toDTO);
+    }
+
+    @PutMapping("/atualizar")
+    public Mono<DetailTarefaDTO> atualizaTarefa(@RequestBody UpdateTarefaDTO request){
+        Tarefa modelUpdate = converter.toModelUpdate(request);
+        System.out.println(modelUpdate.toString());
+        return  repository.findById(modelUpdate.getId())
+                .map(modelUpdate::atualiza)
+                .flatMap(repository::save)
+                .map(converter::toDTO);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
