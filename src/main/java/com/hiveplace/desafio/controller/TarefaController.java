@@ -7,13 +7,17 @@ import com.hiveplace.desafio.dto.DetailTarefaDTO;
 import com.hiveplace.desafio.dto.UpdateTarefaDTO;
 import com.hiveplace.desafio.enums.StatusTarefa;
 import com.hiveplace.desafio.repository.TarefaRepository;
+import com.hiveplace.desafio.service.S3Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.net.URI;
 
 @RequestMapping("/tarefa")
 @RestController
@@ -26,6 +30,9 @@ public class TarefaController {
 
     @Autowired
     private TarefaConverter converter;
+
+    @Autowired
+    private S3Service s3Service;
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/salvar")
@@ -61,5 +68,13 @@ public class TarefaController {
     public Mono<Void> delete(@PathVariable String id) {
         return repository.deleteById(id);
     }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("/anexo")
+    public Mono<URI> subirAnexo(@RequestParam(name = "file") MultipartFile file){
+        URI uri = s3Service.uploadFile(file);
+        return Mono.just(uri);
+    }
+
 
 }
