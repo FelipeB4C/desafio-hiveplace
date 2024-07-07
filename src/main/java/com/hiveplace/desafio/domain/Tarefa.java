@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document
 public class Tarefa {
@@ -19,6 +21,8 @@ public class Tarefa {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataTermino;
 
+    private List<String> listAnexosUrl = new ArrayList<>();
+
     public Tarefa(){
     }
 
@@ -28,11 +32,13 @@ public class Tarefa {
         this.descricao = builder.descricao;
         this.status = builder.status;
         this.dataTermino = builder.dataTermino;
+        this.listAnexosUrl = builder.listAnexosUrl;
     }
 
     public Tarefa atualiza(Tarefa tarefaAntiga){
         return builderFrom(this)
                 .withId(tarefaAntiga.getId())
+                .withArrayListAnexosUrl(tarefaAntiga.getListAnexosUrl())
                 .build();
     }
 
@@ -56,6 +62,15 @@ public class Tarefa {
         return dataTermino;
     }
 
+    public List<String> getListAnexosUrl() {
+        return listAnexosUrl;
+    }
+
+    public void setListAnexosUrl(String url) {
+        listAnexosUrl.add(url);
+    }
+
+
     public static Builder builder(){
         return new Builder();
     }
@@ -72,6 +87,8 @@ public class Tarefa {
         private StatusTarefa status;
         private LocalDate dataTermino;
 
+        private List<String> listAnexosUrl = new ArrayList<>();
+
         public Builder(){
 
         }
@@ -82,6 +99,7 @@ public class Tarefa {
             this.descricao = tarefa.descricao;
             this.status = tarefa.status;
             this.dataTermino = tarefa.dataTermino;
+            this.listAnexosUrl = tarefa.listAnexosUrl;
         }
 
         public Builder withId(String id){
@@ -106,6 +124,16 @@ public class Tarefa {
 
         public Builder withDataTermino(LocalDate dataTermino){
             this.dataTermino = dataTermino;
+            return this;
+        }
+
+        public Builder withListAnexosUrl(String listAnexosUrl){
+            this.listAnexosUrl.add(listAnexosUrl);
+            return this;
+        }
+
+        public Builder withArrayListAnexosUrl(List<String> listAnexosUrl){
+            this.listAnexosUrl = listAnexosUrl;
             return this;
         }
 

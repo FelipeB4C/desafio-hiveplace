@@ -56,7 +56,6 @@ public class TarefaController {
     @PutMapping("/atualizar")
     public Mono<DetailTarefaDTO> atualizaTarefa(@RequestBody UpdateTarefaDTO request){
         Tarefa modelUpdate = converter.toModelUpdate(request);
-        System.out.println(modelUpdate.toString());
         return  repository.findById(modelUpdate.getId())
                 .map(modelUpdate::atualiza)
                 .flatMap(repository::save)
@@ -70,10 +69,14 @@ public class TarefaController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping("/anexo")
-    public Mono<URI> subirAnexo(@RequestParam(name = "file") MultipartFile file){
+    @PostMapping("/{id}/anexo")
+    public Mono<URI> subirAnexo(@RequestParam(name = "file") MultipartFile file, @PathVariable String id){
         URI uri = s3Service.uploadFile(file);
-        return Mono.just(uri);
+        return repository.findById(id)
+                .map(it -> converter.toAnexosUpdate(it, uri))
+                .flatMap(repository::save)
+                .thenReturn(uri);
+
     }
 
 

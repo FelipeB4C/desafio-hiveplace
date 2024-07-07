@@ -5,21 +5,12 @@ import com.hiveplace.desafio.dto.CreateTarefaDTO;
 import com.hiveplace.desafio.dto.DetailTarefaDTO;
 import com.hiveplace.desafio.dto.UpdateTarefaDTO;
 import com.hiveplace.desafio.enums.StatusTarefa;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Flux;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.net.URI;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Component
 public class TarefaConverter {
@@ -44,10 +35,12 @@ public class TarefaConverter {
         return Optional.ofNullable(tarefa)
                 .map(task -> {
                     DetailTarefaDTO tarefaDTO = new DetailTarefaDTO(
+                            task.getId(),
                             task.getNome(),
                             task.getDescricao(),
                             task.getStatus().toString(),
-                            converterData(task.getDataTermino()));
+                            converterData(task.getDataTermino()),
+                            task.getListAnexosUrl());
                     return tarefaDTO;
                 }).orElse(null);
     }
@@ -66,6 +59,15 @@ public class TarefaConverter {
                         .withStatus(StatusTarefa.toEnum(task.status()))
                         .withDataTermino(toLocalDate(task.dataTermino()))
                         .build())
+                .orElse(null);
+    }
+
+    public Tarefa toAnexosUpdate(Tarefa tarefa, URI anexoUri){
+        return Optional.ofNullable(tarefa)
+                .map(task -> {
+                    task.setListAnexosUrl(anexoUri.toString());
+                    return task;
+                })
                 .orElse(null);
     }
 
