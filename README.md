@@ -13,7 +13,9 @@ Nosso projeto é bastante simples, iremos cadastrar tarefas onde vão ter inform
 status (para saber se já foi concluída ou não), prioridade (para indicar se aquela tarefa precisa de atenção urgente ou não),
 data de previsão de finalizar a tarefa e um campos para uma lista de anexos que possam contribuir para a tarefa, como textos, imagens, vídeos e etc.
 
-# INSERIR IMAGEM DO LAMBDA
+# AWS LAMBDA
+![lamba](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/3278a295-bf0c-4535-be23-f26377de31f7)
+
 Na AWS foi criado um bucket S3 para armazenamento dos anexos e também uma Lambda que executa uma função que recebe quantos
 dias faltam para completar aquela tarefa e, de acordo com a quantidade, ela muda o status de prioridade da Tarefa 
 para prioridade BAIXA, MEDIA ou ALTA. Essa função é executada, através de um Trigger, quando for cadastrada uma nova Tarefa.
