@@ -6,6 +6,9 @@ além de utilizar algumas tecnologias AWS como as Lambdas, para a execução de 
 arquivos como imagens, pdf e etc...
 
 # inserir imagem do UML
+
+![uml](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/03500310-380b-4f9d-ad7a-e650d5e4950e)
+
 Nosso projeto é bastante simples, iremos cadastrar tarefas onde vão ter informações como: nome, descrição, 
 status (para saber se já foi concluída ou não), prioridade (para indicar se aquela tarefa precisa de atenção urgente ou não),
 data de previsão de finalizar a tarefa e um campos para uma lista de anexos que possam contribuir para a tarefa, como textos, imagens, vídeos e etc.
