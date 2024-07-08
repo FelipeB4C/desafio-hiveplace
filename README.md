@@ -17,8 +17,7 @@ data de previsão de finalizar a tarefa e um campos para uma lista de anexos que
 ![lamba](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/3278a295-bf0c-4535-be23-f26377de31f7)
 
 Na AWS foi criado um bucket S3 para armazenamento dos anexos e também uma Lambda que executa uma função que recebe quantos
-dias faltam para completar aquela tarefa e, de acordo com a quantidade, ela muda o status de prioridade da Tarefa 
-para prioridade BAIXA, MEDIA ou ALTA. Essa função é executada, através de um Trigger, quando for cadastrada uma nova Tarefa.
+dias faltam para completar aquela tarefa e, de acordo com a quantidade, ela muda o status de prioridade da Tarefa, retornando um valor Inteiro que representa um status de prioridade: 1 - BAIXA, 2 - MEDIA e 3 - ALTA. Essa função é executada, através de um Trigger, quando for cadastrar uma nova Tarefa.
 
 ## Requisitos para rodar a aplicação
 ### Serão necessários:
