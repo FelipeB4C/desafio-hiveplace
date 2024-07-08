@@ -43,9 +43,8 @@ para prioridade BAIXA, MEDIA ou ALTA. Essa função é executada, através de um
 ### Após isso você poderá já experimentar os endpoints no Postman ou no Insomnia. Antes disso, você poderá dar uma olhada
 na documentação da API pelo swagger, basta entrar no link: http://localhost:8080/swagger-ui/index.html.
 
-## IMAGEM DO SWAGGER
-
-    link para download das collections para importar no postman ou insomnia:
+## SWAGGER
+![swagger](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/309ac716-587e-414b-9497-551e3f9d78cd)
 
 ## ENDPOINTS
 ### POST - localhost:8080/tarefa/salvar
