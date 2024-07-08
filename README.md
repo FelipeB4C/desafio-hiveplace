@@ -2,7 +2,7 @@
 
 ## Descrição
 Esse projeto faz parte do desafio HIVEPlace + BBTS e tem como objetivo criar uma API REST utilizando WebFlux e MongoDB, 
-além de utilizar de algumas tecnologias AWS como as Lambdas, para a execução de funções, e o bucket S3 para anexo de 
+além de utilizar algumas tecnologias AWS como as Lambdas, para a execução de funções, e o bucket S3 para anexo de 
 arquivos como imagens, pdf e etc...
 
 # inserir imagem do UML
@@ -33,7 +33,7 @@ para prioridade BAIXA, MEDIA ou ALTA. Essa função é executada, através de um
 
 ## Inserir imagem docker
 
-### Após isso você poderá já experimentar os endpoints no Postman ou no Insomnia. Antes disso, você poderar dar uma olhada
+### Após isso você poderá já experimentar os endpoints no Postman ou no Insomnia. Antes disso, você poderá dar uma olhada
 na documentação da API pelo swagger, basta entrar no link: http://localhost:8080/swagger-ui/index.html.
 
 ## IMAGEM DO SWAGGER
