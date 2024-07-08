@@ -1,6 +1,7 @@
 package com.hiveplace.desafio.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.hiveplace.desafio.enums.Prioridade;
 import com.hiveplace.desafio.enums.StatusTarefa;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,6 +18,7 @@ public class Tarefa {
     private String nome;
     private String descricao;
     private StatusTarefa status;
+    private Prioridade prioridade;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     private LocalDate dataTermino;
@@ -33,6 +35,7 @@ public class Tarefa {
         this.status = builder.status;
         this.dataTermino = builder.dataTermino;
         this.listAnexosUrl = builder.listAnexosUrl;
+        this.prioridade = builder.prioridade;
     }
 
     public Tarefa atualiza(Tarefa tarefaAntiga){
@@ -58,6 +61,14 @@ public class Tarefa {
         return status;
     }
 
+    public Prioridade getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(Prioridade prioridade) {
+        this.prioridade = prioridade;
+    }
+
     public LocalDate getDataTermino() {
         return dataTermino;
     }
@@ -69,7 +80,6 @@ public class Tarefa {
     public void setListAnexosUrl(String url) {
         listAnexosUrl.add(url);
     }
-
 
     public static Builder builder(){
         return new Builder();
@@ -85,8 +95,8 @@ public class Tarefa {
         private String nome;
         private String descricao;
         private StatusTarefa status;
+        private Prioridade prioridade;
         private LocalDate dataTermino;
-
         private List<String> listAnexosUrl = new ArrayList<>();
 
         public Builder(){
@@ -98,6 +108,7 @@ public class Tarefa {
             this.nome = tarefa.nome;
             this.descricao = tarefa.descricao;
             this.status = tarefa.status;
+            this.prioridade = tarefa.prioridade;
             this.dataTermino = tarefa.dataTermino;
             this.listAnexosUrl = tarefa.listAnexosUrl;
         }
@@ -119,6 +130,11 @@ public class Tarefa {
 
         public Builder withStatus(StatusTarefa status){
             this.status = status;
+            return this;
+        }
+
+        public Builder withPrioridade(Prioridade prioridade){
+            this.prioridade = prioridade;
             return this;
         }
 

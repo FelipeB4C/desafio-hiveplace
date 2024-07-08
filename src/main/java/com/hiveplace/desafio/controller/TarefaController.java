@@ -1,5 +1,6 @@
 package com.hiveplace.desafio.controller;
 
+import com.hiveplace.desafio.client.LambdaFunctionClient;
 import com.hiveplace.desafio.converter.TarefaConverter;
 import com.hiveplace.desafio.domain.Tarefa;
 import com.hiveplace.desafio.dto.CreateTarefaDTO;
@@ -7,10 +8,12 @@ import com.hiveplace.desafio.dto.DetailTarefaDTO;
 import com.hiveplace.desafio.dto.UpdateTarefaDTO;
 import com.hiveplace.desafio.enums.StatusTarefa;
 import com.hiveplace.desafio.repository.TarefaRepository;
+import com.hiveplace.desafio.service.CalculaDiasRestantes;
 import com.hiveplace.desafio.service.S3Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,14 +37,26 @@ public class TarefaController {
     @Autowired
     private S3Service s3Service;
 
+    @Autowired
+    private CalculaDiasRestantes calculaDias;
+
+    @Autowired
+    private LambdaFunctionClient lambda;
+
+    @Value("${aws.lambda.auth.password}")
+    private String password;
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/salvar")
     public Mono<Tarefa> salvarTarefa(@RequestBody CreateTarefaDTO request){
-        Tarefa model = converter.toModel(request);
+        String diasRestantes = calculaDias.calculaDias(request.dataTermino());
+        Integer prioridade = lambda.prioridade(diasRestantes, password);
+        Tarefa model = converter.toModel(request, prioridade);
         return Mono.just(model)
                 .flatMap(repository::save)
                 .doOnNext(it -> LOGGER.info("Tarefa salva com o id {}", it.getId()));
     }
+
 
     @GetMapping("/listarTodas")
     public Flux<DetailTarefaDTO> listarTodasTarefas(){

@@ -4,6 +4,7 @@ import com.hiveplace.desafio.domain.Tarefa;
 import com.hiveplace.desafio.dto.CreateTarefaDTO;
 import com.hiveplace.desafio.dto.DetailTarefaDTO;
 import com.hiveplace.desafio.dto.UpdateTarefaDTO;
+import com.hiveplace.desafio.enums.Prioridade;
 import com.hiveplace.desafio.enums.StatusTarefa;
 import org.springframework.stereotype.Component;
 import java.net.URI;
@@ -15,12 +16,13 @@ import java.util.Optional;
 @Component
 public class TarefaConverter {
 
-    public Tarefa toModel(CreateTarefaDTO tarefaDTO){
+    public Tarefa toModel(CreateTarefaDTO tarefaDTO, Integer prioridade){
         return Optional.ofNullable(tarefaDTO)
                 .map(task -> Tarefa.builder()
                         .withNome(task.nome())
                         .withDescricao(task.descricao())
                         .withStatus(StatusTarefa.toEnum(0))
+                        .withPrioridade(Prioridade.toEnum(prioridade))
                         .withDataTermino(toLocalDate(task.dataTermino()))
                         .build())
                 .orElse(null);
@@ -39,6 +41,7 @@ public class TarefaConverter {
                             task.getNome(),
                             task.getDescricao(),
                             task.getStatus().toString(),
+                            task.getPrioridade().toString(),
                             converterData(task.getDataTermino()),
                             task.getListAnexosUrl());
                     return tarefaDTO;
