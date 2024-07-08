@@ -7,7 +7,7 @@ arquivos como imagens, pdf e etc...
 
 # UML
 
-![uml](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/03500310-380b-4f9d-ad7a-e650d5e4950e)
+![uml](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/bcec3e89-3609-41e4-ab88-6295463072ef)
 
 Nosso projeto é bastante simples, iremos cadastrar tarefas onde vão ter informações como: nome, descrição, 
 status (para saber se já foi concluída ou não), prioridade (para indicar se aquela tarefa precisa de atenção urgente ou não),
