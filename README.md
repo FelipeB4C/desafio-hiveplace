@@ -5,7 +5,7 @@ Esse projeto faz parte do desafio HIVEPlace + BBTS e tem como objetivo criar uma
 além de utilizar algumas tecnologias AWS como as Lambdas, para a execução de funções, e o bucket S3 para anexo de 
 arquivos como imagens, pdf e etc...
 
-# inserir imagem do UML
+# UML
 
 ![uml](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/03500310-380b-4f9d-ad7a-e650d5e4950e)
 
@@ -34,7 +34,9 @@ para prioridade BAIXA, MEDIA ou ALTA. Essa função é executada, através de um
 
     Isso fará que seja gerado um container no seu docker com as imagens da nossa API e do banco de Dados MongoDB
 
-## Inserir imagem docker
+## Docker
+![docker](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/1f87b3db-7712-4252-ae1d-b5cb8e5d6612)
+
 
 ### Após isso você poderá já experimentar os endpoints no Postman ou no Insomnia. Antes disso, você poderá dar uma olhada
 na documentação da API pelo swagger, basta entrar no link: http://localhost:8080/swagger-ui/index.html.
