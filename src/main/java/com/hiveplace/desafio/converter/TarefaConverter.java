@@ -60,6 +60,7 @@ public class TarefaConverter {
                         .withNome(task.nome())
                         .withDescricao(task.descricao())
                         .withStatus(StatusTarefa.toEnum(task.status()))
+                        .withPrioridade(Prioridade.toEnum(task.prioridade()))
                         .withDataTermino(toLocalDate(task.dataTermino()))
                         .build())
                 .orElse(null);

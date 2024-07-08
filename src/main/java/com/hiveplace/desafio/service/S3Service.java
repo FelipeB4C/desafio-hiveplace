@@ -16,7 +16,7 @@ import java.net.URISyntaxException;
 @Service
 public class S3Service {
 
-    private Logger LOGGER = LoggerFactory.getLogger(S3Service.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(S3Service.class);
     @Autowired
     private AmazonS3 s3client;
 
