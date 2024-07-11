@@ -45,6 +45,10 @@ na documentação da API pelo swagger, basta entrar no link: http://localhost:80
 ## SWAGGER
 ![swagger](https://github.com/FelipeB4C/desafio-hiveplace/assets/39536596/309ac716-587e-414b-9497-551e3f9d78cd)
 
+## DOWNLOAD COLLECTIONS REQUEST
+### Faça o download do JSON das collections para importar no Postman, ou Insomnia, e poder fazer as request mais facilmente.
+	[request collections](https://github.com/user-attachments/files/16173553/HIVEPlace.postman_collection.json)
+
 ## ENDPOINTS
 ### POST - localhost:8080/tarefa/salvar
 #### REQUEST
