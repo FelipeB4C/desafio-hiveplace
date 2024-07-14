@@ -29,7 +29,9 @@ dias faltam para completar aquela tarefa e, de acordo com a quantidade, ela muda
     Com o projeto baixado e extraído
     Entre na pasta do projeto até chegar onde tem os arquivos Dockerfile e docker-compose
     Após isso utilize o seu bash de preferênci para poder rodar o seguinte comando dentro dessa pasta
-
+    
+    
+    mvn package
     docker build -t challenge .
     docker-compose up -d
 
