@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(name="consultaPrioridade", url="${aws.lambda.function}")
 public interface LambdaFunctionClient {
 
-    @GetMapping(value="/calc-date?dias={dias}", consumes="application/json")
+    @GetMapping(value="/get-priority?dias={dias}", consumes="application/json")
     Integer prioridade(@PathVariable("dias") String dias, @RequestHeader("authorizationToken") String senha);
 
 }
